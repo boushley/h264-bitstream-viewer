@@ -76,16 +76,18 @@
       <Cell>{{ pps.pic_scaling_matrix_present_flag }}</Cell>
     </Row>
     <template v-if="pps.pic_scaling_matrix_present_flag">
-      <TodoRow tag="pps.pic_scaling_matrix_present_flag" />
-      <!--
-        TODO:
-        int pic_scaling_list_present_flag[8];
-        int ScalingList4x4[6][16];
-        int UseDefaultScalingMatrix4x4Flag[6];
-        int ScalingList8x8[2][64];
-        int UseDefaultScalingMatrix8x8Flag[2];
-        -->
+      <CollapseRows
+        title="pic_scaling_list_present_flag"
+        :items="pps.pic_scaling_list_present_flag"
+      />
     </template>
+    <!--
+      TODO:
+      int ScalingList4x4[6][16];
+      int UseDefaultScalingMatrix4x4Flag[6];
+      int ScalingList8x8[2][64];
+      int UseDefaultScalingMatrix8x8Flag[2];
+    -->
     <Row>
       <Cell>second_chroma_qp_index_offset</Cell>
       <Cell>{{ pps.second_chroma_qp_index_offset }}</Cell>
@@ -94,12 +96,21 @@
 </template>
 
 <script>
-import { Table, Row, Cell, HeaderRow, HeaderCell, TodoRow } from '../Table';
+import {
+  Table,
+  Row,
+  Cell,
+  HeaderRow,
+  HeaderCell,
+  TodoRow,
+  CollapseRows,
+} from '../Table';
 
 export default {
   components: {
     Table,
     Row,
+    CollapseRows,
     Cell,
     TodoRow,
     HeaderRow,

@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     handleToggle() {
-      console.log('click');
       this.isOpen = !this.isOpen;
     },
   },
