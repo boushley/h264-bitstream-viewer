@@ -1,5 +1,4 @@
-# Package manager
-node_modules/
-
-# Build
+.DS_Store
+.idea/
 dist/
+node_modules/
