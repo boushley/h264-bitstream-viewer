@@ -8,7 +8,7 @@ dist/h264bitstream.js: \
 		-O2  \
 		-s ASSERTIONS=1 \
 		-s ALLOW_MEMORY_GROWTH=1 \
-		-s EXTRA_EXPORTED_RUNTIME_METHODS='["setValue"]' \
+		-s EXPORTED_RUNTIME_METHODS='["setValue"]' \
 		-Ih264bitstream/ \
 		-Isrc/wrapper/ \
 		-o $@ \

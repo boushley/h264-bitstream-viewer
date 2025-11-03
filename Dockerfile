@@ -1,4 +1,4 @@
-FROM trzeci/emscripten
+FROM emscripten/emsdk
 
 RUN apt-get update && apt-get install -y autoconf libtool
 
