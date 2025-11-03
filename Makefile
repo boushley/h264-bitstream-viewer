@@ -8,7 +8,8 @@ dist/h264bitstream.js: \
 		-O2  \
 		-s ASSERTIONS=1 \
 		-s ALLOW_MEMORY_GROWTH=1 \
-		-s EXPORTED_RUNTIME_METHODS='["setValue"]' \
+		-s EXPORTED_RUNTIME_METHODS='["setValue", "ccall", "cwrap", "HEAPU8"]' \
+		-s EXPORTED_FUNCTIONS='["_malloc", "_free"]' \
 		-Ih264bitstream/ \
 		-Isrc/wrapper/ \
 		-o $@ \
