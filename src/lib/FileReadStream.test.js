@@ -1,23 +1,20 @@
-import avaTest from 'ava';
-import ninos from 'ninos';
+import test from 'ava';
+import sinon from 'sinon';
 
 import { FileReadStream } from './FileReadStream';
-
-const test = ninos(avaTest);
 
 test.cb('empty file', (t) => {
   const file = new File([], 'test');
   const stream = new FileReadStream(file);
 
-  const chunkListener = t.context.stub();
-  const endListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(1);
 
   stream.addEventListener('data', chunkListener);
 
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 0);
+    t.is(chunkListener.callCount, 0);
     t.end();
   });
 
@@ -32,16 +29,15 @@ test.cb('entire file in one chunk', (t) => {
     chunkSize: 10,
   });
 
-  const chunkListener = t.context.stub();
-  const endListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(2);
 
   stream.addEventListener('data', chunkListener);
 
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 1);
-    t.deepEqual(chunkListener.calls[0].arguments[0], data.buffer);
+    t.is(chunkListener.callCount, 1);
+    t.deepEqual(chunkListener.getCall(0).args[0], data.buffer);
     t.end();
   });
 
@@ -56,20 +52,19 @@ test.cb('entire file in multiple chunks', (t) => {
     chunkSize: 1,
   });
 
-  const chunkListener = t.context.stub();
-  const endListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(6);
 
   stream.addEventListener('data', chunkListener);
 
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 5);
-    t.deepEqual(chunkListener.calls[0].arguments[0], data.buffer.slice(0, 1));
-    t.deepEqual(chunkListener.calls[1].arguments[0], data.buffer.slice(1, 2));
-    t.deepEqual(chunkListener.calls[2].arguments[0], data.buffer.slice(2, 3));
-    t.deepEqual(chunkListener.calls[3].arguments[0], data.buffer.slice(3, 4));
-    t.deepEqual(chunkListener.calls[4].arguments[0], data.buffer.slice(4, 5));
+    t.is(chunkListener.callCount, 5);
+    t.deepEqual(chunkListener.getCall(0).args[0], data.buffer.slice(0, 1));
+    t.deepEqual(chunkListener.getCall(1).args[0], data.buffer.slice(1, 2));
+    t.deepEqual(chunkListener.getCall(2).args[0], data.buffer.slice(2, 3));
+    t.deepEqual(chunkListener.getCall(3).args[0], data.buffer.slice(3, 4));
+    t.deepEqual(chunkListener.getCall(4).args[0], data.buffer.slice(4, 5));
     t.end();
   });
 

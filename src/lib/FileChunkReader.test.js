@@ -1,9 +1,6 @@
-import avaTest from 'ava';
-import ninos from 'ninos';
+import test from 'ava';
 
 import { FileChunkReader } from './FileChunkReader';
-
-const test = ninos(avaTest);
 
 test('empty file', async (t) => {
   const data = new Uint8Array([]);

@@ -1,21 +1,19 @@
-import avaTest from 'ava';
-import ninos from 'ninos';
+import test from 'ava';
+import sinon from 'sinon';
 
 import { H264BitstreamHeaderStream } from './H264BitstreamHeaderStream';
-
-const test = ninos(avaTest);
 
 test.cb('clean chunks, 3-byte start-code', (t) => {
   const stream = new H264BitstreamHeaderStream();
 
-  const chunkListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(3);
 
   stream.addEventListener('data', chunkListener);
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 2);
-    t.deepEqual(chunkListener.calls[0].arguments[0], {
+    t.is(chunkListener.callCount, 2);
+    t.deepEqual(chunkListener.getCall(0).args[0], {
       start: 0,
       end: 4,
       size: 5,
@@ -23,7 +21,7 @@ test.cb('clean chunks, 3-byte start-code', (t) => {
       refIdc: 3,
       type: 7,
     });
-    t.deepEqual(chunkListener.calls[1].arguments[0], {
+    t.deepEqual(chunkListener.getCall(1).args[0], {
       start: 5,
       end: 10,
       size: 6,
@@ -42,14 +40,14 @@ test.cb('clean chunks, 3-byte start-code', (t) => {
 test.cb('clean chunks, 4-byte start-code', (t) => {
   const stream = new H264BitstreamHeaderStream();
 
-  const chunkListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(3);
 
   stream.addEventListener('data', chunkListener);
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 2);
-    t.deepEqual(chunkListener.calls[0].arguments[0], {
+    t.is(chunkListener.callCount, 2);
+    t.deepEqual(chunkListener.getCall(0).args[0], {
       start: 1,
       end: 5,
       size: 5,
@@ -57,7 +55,7 @@ test.cb('clean chunks, 4-byte start-code', (t) => {
       refIdc: 3,
       type: 7,
     });
-    t.deepEqual(chunkListener.calls[1].arguments[0], {
+    t.deepEqual(chunkListener.getCall(1).args[0], {
       start: 7,
       end: 12,
       size: 6,
@@ -76,14 +74,14 @@ test.cb('clean chunks, 4-byte start-code', (t) => {
 test.cb('second chunk zeros in first chunk', (t) => {
   const stream = new H264BitstreamHeaderStream();
 
-  const chunkListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(3);
 
   stream.addEventListener('data', chunkListener);
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 2);
-    t.deepEqual(chunkListener.calls[0].arguments[0], {
+    t.is(chunkListener.callCount, 2);
+    t.deepEqual(chunkListener.getCall(0).args[0], {
       start: 1,
       end: 5,
       size: 5,
@@ -91,7 +89,7 @@ test.cb('second chunk zeros in first chunk', (t) => {
       refIdc: 3,
       type: 7,
     });
-    t.deepEqual(chunkListener.calls[1].arguments[0], {
+    t.deepEqual(chunkListener.getCall(1).args[0], {
       start: 7,
       end: 12,
       size: 6,
@@ -110,14 +108,14 @@ test.cb('second chunk zeros in first chunk', (t) => {
 test.cb('combine chunks, 3-byte start-code', (t) => {
   const stream = new H264BitstreamHeaderStream();
 
-  const chunkListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(6);
 
   stream.addEventListener('data', chunkListener);
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 5);
-    t.deepEqual(chunkListener.calls[0].arguments[0], {
+    t.is(chunkListener.callCount, 5);
+    t.deepEqual(chunkListener.getCall(0).args[0], {
       start: 0,
       end: 5,
       size: 6,
@@ -125,7 +123,7 @@ test.cb('combine chunks, 3-byte start-code', (t) => {
       refIdc: 3,
       type: 7,
     });
-    t.deepEqual(chunkListener.calls[1].arguments[0], {
+    t.deepEqual(chunkListener.getCall(1).args[0], {
       start: 6,
       end: 14,
       size: 9,
@@ -133,7 +131,7 @@ test.cb('combine chunks, 3-byte start-code', (t) => {
       refIdc: 3,
       type: 8,
     });
-    t.deepEqual(chunkListener.calls[2].arguments[0], {
+    t.deepEqual(chunkListener.getCall(2).args[0], {
       start: 15,
       end: 19,
       size: 5,
@@ -141,7 +139,7 @@ test.cb('combine chunks, 3-byte start-code', (t) => {
       refIdc: 3,
       type: 5,
     });
-    t.deepEqual(chunkListener.calls[3].arguments[0], {
+    t.deepEqual(chunkListener.getCall(3).args[0], {
       start: 20,
       end: 27,
       size: 8,
@@ -149,7 +147,7 @@ test.cb('combine chunks, 3-byte start-code', (t) => {
       refIdc: 2,
       type: 1,
     });
-    t.deepEqual(chunkListener.calls[4].arguments[0], {
+    t.deepEqual(chunkListener.getCall(4).args[0], {
       start: 28,
       end: 31,
       size: 4,
@@ -172,14 +170,14 @@ test.cb('combine chunks, 3-byte start-code', (t) => {
 test.cb('combine chunks, 4-byte start-code', (t) => {
   const stream = new H264BitstreamHeaderStream();
 
-  const chunkListener = t.context.stub();
+  const chunkListener = sinon.stub();
 
   t.plan(7);
 
   stream.addEventListener('data', chunkListener);
   stream.addEventListener('end', () => {
-    t.is(chunkListener.calls.length, 6);
-    t.deepEqual(chunkListener.calls[0].arguments[0], {
+    t.is(chunkListener.callCount, 6);
+    t.deepEqual(chunkListener.getCall(0).args[0], {
       start: 1,
       end: 6,
       size: 6,
@@ -187,7 +185,7 @@ test.cb('combine chunks, 4-byte start-code', (t) => {
       refIdc: 3,
       type: 7,
     });
-    t.deepEqual(chunkListener.calls[1].arguments[0], {
+    t.deepEqual(chunkListener.getCall(1).args[0], {
       start: 8,
       end: 16,
       size: 9,
@@ -195,7 +193,7 @@ test.cb('combine chunks, 4-byte start-code', (t) => {
       refIdc: 3,
       type: 8,
     });
-    t.deepEqual(chunkListener.calls[2].arguments[0], {
+    t.deepEqual(chunkListener.getCall(2).args[0], {
       start: 18,
       end: 22,
       size: 5,
@@ -203,7 +201,7 @@ test.cb('combine chunks, 4-byte start-code', (t) => {
       refIdc: 3,
       type: 5,
     });
-    t.deepEqual(chunkListener.calls[3].arguments[0], {
+    t.deepEqual(chunkListener.getCall(3).args[0], {
       start: 24,
       end: 31,
       size: 8,
@@ -211,7 +209,7 @@ test.cb('combine chunks, 4-byte start-code', (t) => {
       refIdc: 2,
       type: 1,
     });
-    t.deepEqual(chunkListener.calls[4].arguments[0], {
+    t.deepEqual(chunkListener.getCall(4).args[0], {
       start: 33,
       end: 36,
       size: 4,
@@ -219,7 +217,7 @@ test.cb('combine chunks, 4-byte start-code', (t) => {
       refIdc: 0,
       type: 6,
     });
-    t.deepEqual(chunkListener.calls[5].arguments[0], {
+    t.deepEqual(chunkListener.getCall(5).args[0], {
       start: 38,
       end: 43,
       size: 6,
