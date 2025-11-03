@@ -1,6 +1,6 @@
-import sinon from 'sinon';
+import sinon from 'sinon/pkg/sinon.js';
 
-import { FileReadStream } from './FileReadStream.js';
+import { FileReadStream } from './FileReadStream';
 
 describe('FileReadStream', () => {
   test('empty file', (done) => {

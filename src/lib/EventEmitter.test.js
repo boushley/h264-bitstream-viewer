@@ -1,6 +1,6 @@
-import sinon from 'sinon';
+import sinon from 'sinon/pkg/sinon.js';
 
-import { EventEmitter } from './EventEmitter.js';
+import { EventEmitter } from './EventEmitter';
 
 describe('EventEmitter', () => {
   test('multiple events', () => {
