@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { H264BitstreamHeaderStream } from './H264BitstreamHeaderStream';
+import { H264BitstreamHeaderStream } from './H264BitstreamHeaderStream.js';
 
 describe('H264BitstreamHeaderStream', () => {
   test('clean chunks, 3-byte start-code', (done) => {

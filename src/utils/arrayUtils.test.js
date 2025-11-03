@@ -1,4 +1,4 @@
-import arrayUtils from './arrayUtils';
+import arrayUtils from './arrayUtils.js';
 
 describe('arrayUtils', () => {
   test('range: empty', () => {

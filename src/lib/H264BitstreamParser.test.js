@@ -1,4 +1,4 @@
-import { H264BitstreamParser } from './H264BitstreamParser';
+import { H264BitstreamParser } from './H264BitstreamParser.js';
 
 describe('H264BitstreamParser', () => {
   test('findUnit: empty data, no offset', () => {

@@ -1,4 +1,4 @@
-import { FileChunkReader } from './FileChunkReader';
+import { FileChunkReader } from './FileChunkReader.js';
 
 describe('FileChunkReader', () => {
   test('empty file', async () => {

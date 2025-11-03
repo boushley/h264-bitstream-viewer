@@ -5,6 +5,7 @@
   "description": "H264 bistream viewer",
   "author": "Michael Radionov (https://github.com/mradionov)",
   "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mradionov/h264-bitstream-viewer.git"
@@ -13,8 +14,8 @@
     "build": "webpack",
     "build:watch": "npm run build -- --watch",
     "start": "npm run build:watch",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "dependencies": {
     "css-loader": "^0.15.6",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "html-webpack-plugin": "^5.6.4",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.2.0",
     "prettier": "^1.17.0",
     "sinon": "^21.0.0",
     "webpack": "^5.102.1",
