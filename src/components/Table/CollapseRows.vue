@@ -6,7 +6,7 @@
         {{ title }}[0 ... {{ items.length - 1 }}]
       </Cell>
     </Row>
-    <Row v-if="isOpen" v-for="(v, i) in items">
+    <Row v-if="isOpen" v-for="(v, i) in items" :key="i">
       <Cell :level="2">{{ title }}[{{ i }}]</Cell>
       <Cell>{{ items[i] }}</Cell>
     </Row>
