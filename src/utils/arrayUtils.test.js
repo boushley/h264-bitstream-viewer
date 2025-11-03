@@ -1,45 +1,45 @@
-import test from 'ava';
-
 import arrayUtils from './arrayUtils';
 
-test('range: empty', (t) => {
-  const range = arrayUtils.range();
+describe('arrayUtils', () => {
+  test('range: empty', () => {
+    const range = arrayUtils.range();
 
-  t.deepEqual(range, []);
-});
+    expect(range).toEqual([]);
+  });
 
-test('range: no start', (t) => {
-  const range = arrayUtils.range(3);
+  test('range: no start', () => {
+    const range = arrayUtils.range(3);
 
-  t.deepEqual(range, [0, 1, 2]);
-});
+    expect(range).toEqual([0, 1, 2]);
+  });
 
-test('range: start and end', (t) => {
-  const range = arrayUtils.range(2, 5);
+  test('range: start and end', () => {
+    const range = arrayUtils.range(2, 5);
 
-  t.deepEqual(range, [2, 3, 4]);
-});
+    expect(range).toEqual([2, 3, 4]);
+  });
 
-test('concatUint8Arrays: empty', (t) => {
-  const result = arrayUtils.concatUint8Arrays();
+  test('concatUint8Arrays: empty', () => {
+    const result = arrayUtils.concatUint8Arrays();
 
-  t.deepEqual(result, new Uint8Array([]));
-});
+    expect(result).toEqual(new Uint8Array([]));
+  });
 
-test('concatUint8Arrays: one input', (t) => {
-  const input1 = new Uint8Array([1, 2, 3]);
+  test('concatUint8Arrays: one input', () => {
+    const input1 = new Uint8Array([1, 2, 3]);
 
-  const result = arrayUtils.concatUint8Arrays(input1);
+    const result = arrayUtils.concatUint8Arrays(input1);
 
-  t.deepEqual(result, input1);
-  t.not(result, input1);
-});
+    expect(result).toEqual(input1);
+    expect(result).not.toBe(input1);
+  });
 
-test('concatUint8Arrays: two inputs', (t) => {
-  const input1 = new Uint8Array([1, 2, 3]);
-  const input2 = new Uint8Array([4, 5]);
+  test('concatUint8Arrays: two inputs', () => {
+    const input1 = new Uint8Array([1, 2, 3]);
+    const input2 = new Uint8Array([4, 5]);
 
-  const result = arrayUtils.concatUint8Arrays(input1, input2);
+    const result = arrayUtils.concatUint8Arrays(input1, input2);
 
-  t.deepEqual(result, new Uint8Array([1, 2, 3, 4, 5]));
+    expect(result).toEqual(new Uint8Array([1, 2, 3, 4, 5]));
+  });
 });
