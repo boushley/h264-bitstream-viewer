@@ -10,6 +10,10 @@ const config = {
   entry: {
     main: path.join(rootDir, 'src/main.js'),
   },
+  output: {
+    // Avoid MD4; works on Node 18/20+ without legacy OpenSSL
+    hashFunction: 'xxhash64',
+  },
   module: {
     rules: [
       {
