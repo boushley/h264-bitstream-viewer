@@ -67,9 +67,6 @@ This phase focuses on building the interactive UI components that display the bi
     *   Create a `Payload` component to display the parsed payload of the selected NAL unit.
     *   These components will read the `selectedHeader` and `payload` from the central state.
 
-3.  **Keyboard Shortcuts:**
-    *   Integrate the `makeKeydownListener` logic within a `useEffect` hook in `App.js` to handle up/down arrow navigation, dispatching actions to update the selected header.
-
 ### Phase 3: Finalization and Cleanup
 
 Once the React application has achieved full feature parity with the Vue application and is deemed stable, we can proceed with removing the old code.

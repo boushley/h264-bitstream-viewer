@@ -56,8 +56,9 @@ function App() {
     }
   };
 
+  const indexOffset = (state.currentPage - 1) * state.itemsPerPage;
   const paginatedHeaders = state.headers.slice(
-    (state.currentPage - 1) * state.itemsPerPage,
+    indexOffset,
     state.currentPage * state.itemsPerPage
   );
 
@@ -67,12 +68,13 @@ function App() {
       <Content>
         <FileUpload onFileSelect={handleFileSelect} />
         {state.isLoaded && (
-          <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%' }}>
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <div style={{ width: '650px' }}>
               <HeaderList
                 headers={paginatedHeaders}
                 onHeaderSelect={handleHeaderSelect}
                 selectedIndex={state.selectedGlobalIndex}
+                indexOffset={indexOffset}
               />
               <Pagination
                 currentPage={state.currentPage}
@@ -80,7 +82,7 @@ function App() {
                 onPageChange={handlePageChange}
               />
             </div>
-            <div style={{ width: '50%' }}>
+            <div style={{ flexGrow: 1 }}>
               <Tabs>
                 <Tab label="NAL">
                   <HeaderInfo header={state.selectedHeader} />

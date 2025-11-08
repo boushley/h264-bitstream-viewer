@@ -9,7 +9,7 @@ export const initialState = {
   headers: [],
   selectedGlobalIndex: -1,
   currentPage: 1,
-  itemsPerPage: 10,
+  itemsPerPage: 50,
   totalPages: 0,
   payload: null,
   selectedHeader: null,
