@@ -43,8 +43,8 @@ The goal of this phase is to get the basic file loading and processing working i
     *   Set up a state management solution within `App.js`. A combination of `useReducer` and `useContext` is recommended to manage application-wide state (file loading status, headers, selected items, pagination, etc.). This will prevent excessive prop-drilling.
 
 2.  **Application Shell:**
-    *   Create the basic layout in `App.js` mirroring the Vue app's structure (header, content area, footer).
-    *   Styling will be done with CSS Modules, similar to the Vue app, to allow for potential style reuse and maintain scoped styles.
+    *   Create the basic layout in `App.js` (header, content area, footer), use the screenshots from `docs/screenshot.png` and `docs/app-with-loaded-data.png` to understand the application shell layout.
+    *   Keep styling simple and clean.
 
 3.  **File Upload and Processing:**
     *   Implement a file upload component.

@@ -8,7 +8,8 @@ const rootDir = path.join(__dirname);
 const config = {
   mode: 'development',
   entry: {
-    main: path.join(rootDir, 'src/main.js'),
+    vue: path.join(rootDir, 'src/main.js'),
+    react: path.join(rootDir, 'src/react/index.js'),
   },
   output: {
     // Avoid MD4; works on Node 18/20+ without legacy OpenSSL
@@ -19,6 +20,16 @@ const config = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       // This will apply to both plain `.css` files and `<style>` block
       // in `.vue` files
@@ -48,12 +59,20 @@ const config = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.join(rootDir, 'src', 'index.html'),
+      filename: 'vue.html',
+      chunks: ['vue'],
+      hash: true,
+    }),
+    new HTMLWebpackPlugin({
+      template: path.join(rootDir, 'src', 'index.html'),
+      filename: 'index.html',
+      chunks: ['react'],
       hash: true,
     }),
     new VueLoaderPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.jsx', '.vue', '.json'],
   },
 };
 
