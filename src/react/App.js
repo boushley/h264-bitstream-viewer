@@ -12,6 +12,7 @@ import Payload from './components/Payload';
 import { H264BitstreamFile } from '../lib/H264BitstreamFile';
 import { H264BitstreamBinding } from '../lib/H264BitstreamBinding';
 import './App.css';
+import FrameRender from './components/FrameRender';
 
 function App() {
   const { state, dispatch } = useContext(AppContext);
@@ -60,7 +61,7 @@ function App() {
   const indexOffset = (state.currentPage - 1) * state.itemsPerPage;
   const paginatedHeaders = state.headers.slice(
     indexOffset,
-    state.currentPage * state.itemsPerPage
+    state.currentPage * state.itemsPerPage,
   );
 
   return (
@@ -90,6 +91,12 @@ function App() {
                 </Tab>
                 <Tab label="Payload">
                   <Payload payload={state.payload} />
+                </Tab>
+                <Tab label="Frame Render">
+                  <FrameRender
+                    header={state.selectedHeader}
+                    payload={state.payload}
+                  />
                 </Tab>
               </Tabs>
             </div>

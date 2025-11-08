@@ -1,7 +1,6 @@
 const path = require('path');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const rootDir = path.join(__dirname);
 
@@ -17,10 +16,6 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-      },
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -30,12 +25,10 @@ const config = {
           },
         },
       },
-      // This will apply to both plain `.css` files and `<style>` block
-      // in `.vue` files
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -62,7 +55,6 @@ const config = {
       chunks: ['react'],
       hash: true,
     }),
-    new VueLoaderPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
