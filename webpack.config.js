@@ -8,7 +8,6 @@ const rootDir = path.join(__dirname);
 const config = {
   mode: 'development',
   entry: {
-    vue: path.join(rootDir, 'src/main.js'),
     react: path.join(rootDir, 'src/react/index.js'),
   },
   output: {
@@ -59,12 +58,6 @@ const config = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.join(rootDir, 'src', 'index.html'),
-      filename: 'vue.html',
-      chunks: ['vue'],
-      hash: true,
-    }),
-    new HTMLWebpackPlugin({
-      template: path.join(rootDir, 'src', 'index.html'),
       filename: 'index.html',
       chunks: ['react'],
       hash: true,
@@ -72,7 +65,7 @@ const config = {
     new VueLoaderPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.vue', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
   },
 };
 
