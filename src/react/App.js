@@ -27,7 +27,8 @@ function App() {
     dispatch({ type: 'FILE_SELECTED', payload: file });
 
     const bs = new H264BitstreamFile(file);
-    setBitstream(bs);
+    const bitstream = new H264BitstreamBinding(bs);
+    setBitstream(bitstream);
 
     bs.addEventListener('start', () => {
       dispatch({ type: 'LOADING_START' });
@@ -51,7 +52,7 @@ function App() {
   const handleHeaderSelect = async (header, index) => {
     dispatch({ type: 'SELECT_HEADER', payload: { header, index } });
     if (bitstream) {
-      const payload = await bitstream.getUnitData(header);
+      const payload = await bitstream.read(header);
       dispatch({ type: 'SET_PAYLOAD', payload });
     }
   };
@@ -82,7 +83,7 @@ function App() {
                 onPageChange={handlePageChange}
               />
             </div>
-            <div style={{ flexGrow: 1 }}>
+            <div style={{ flexGrow: 1, maxWidth: 'calc(100% - 650px - 20px)' }}>
               <Tabs>
                 <Tab label="NAL">
                   <HeaderInfo header={state.selectedHeader} />
